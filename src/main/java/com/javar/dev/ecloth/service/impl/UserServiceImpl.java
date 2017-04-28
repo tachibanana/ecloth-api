@@ -42,8 +42,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User updateUsers(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		return userDao.addUser(user);
 	}
 
 	@Override
@@ -53,8 +52,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User deleteUsers(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		return userDao.deleteUsers(user);
 	}
 
 }

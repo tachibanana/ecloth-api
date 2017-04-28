@@ -3,7 +3,9 @@ package com.javar.dev.ecloth.resource.impl;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -33,7 +35,7 @@ public class UserResourceImpl implements UserResource{
 	}
 
 	@Override
-	public User getUserByUsername(String username) {
+	public User getUsers(String username) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -55,14 +57,31 @@ public class UserResourceImpl implements UserResource{
 		return userService.addUser(user);
 	}
 
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("user/{userId}")
 	@Override
-	public User updateUser(long id, User user) {
+	public User updateUserById(@PathParam("userId") long id, User user) {
+		return userService.updateUserById(id, user);
+	}
+	
+	@Override
+	public User updateUsers(User user) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@DELETE
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("user/{userId}")
 	@Override
-	public User deleteUserById(long id) {
+	public User deleteUserById(@PathParam("userId") long id) {
+		return userService.deleteUserById(id);
+	}
+
+	@Override
+	public User deleteUsers(User user) {
 		// TODO Auto-generated method stub
 		return null;
 	}

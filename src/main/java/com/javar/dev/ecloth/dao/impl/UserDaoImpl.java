@@ -70,23 +70,51 @@ public class UserDaoImpl implements UserDao{
 		}
 		return user;
 	}
-
-	@Override
-	public User deleteUserById(long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public User updateUserById(long id, User user) {
-		// TODO Auto-generated method stub
-		return null;
+		User oldUser = null;
+		try{
+			Session session = sessionFactory.openSession();
+			session.beginTransaction();
+			
+			oldUser = session.get(User.class, user.getUserId());
+			oldUser.setUsername(user.getUsername());
+			oldUser.setPassword(user.getPassword());
+			oldUser.setEmail(user.getEmail());
+			oldUser.setFirstName(user.getFirstName());
+			oldUser.setLastName(user.getLastName());
+			oldUser.setAccessType(user.getAccessType());
+			oldUser.setActivated(user.isActivated());
+			
+			session.getTransaction().commit();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return user;
 	}
 
 	@Override
 	public User updateUsers(User user) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public User deleteUserById(long id) {
+		User user = null;
+		try{
+			Session session = sessionFactory.openSession();
+			session.beginTransaction();
+			user = session.get(User.class, id);
+			session.delete(user);
+			session.getTransaction().commit();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return user;
 	}
 
 	@Override
